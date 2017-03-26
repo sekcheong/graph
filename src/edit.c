@@ -57,8 +57,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #define MAX(a,b) ((a > b) ? a : b)
 #define MIN(a,b) ((a < b) ? a : b)
+void copy_label(Label l1, Label l2);
 
-edit_label(l)
+void edit_label(l)
 Label l;
 {
   char *txt, inp_str[80];
@@ -117,7 +118,7 @@ Label l;
   }
 }
 
-copy_curve(c1, c2) /* Copies curve c2 to c1 */
+void copy_curve(c1, c2) /* Copies curve c2 to c1 */
 Curve c1, c2;
 {
   Flist f, newf;
@@ -183,8 +184,7 @@ Curve c1, c2;
   c1->bezier = c2->bezier;
 }
 
-copy_label(l1, l2) /* Copies label l2 to l1 */
-Label l1, l2;
+void copy_label(Label l1, Label l2) /* Copies label l2 to l1 */
 {
   l1->label = l2->label;
   l1->x = l2->x;
@@ -201,7 +201,7 @@ Label l1, l2;
   l1->linesep = l2->linesep;
 }
 
-copy_axis(a1, a2) /* Copies axis a2 to a1 */
+void copy_axis(a1, a2) /* Copies axis a2 to a1 */
 Axis a1, a2;
 {
   copy_label(a1->label, a2->label);
@@ -374,7 +374,7 @@ Graphs all_gs;
   return lastg;
 }
 
-copy_legend(l1, l2)
+void copy_legend(l1, l2)
 Legend l1, l2;
 {
   l1->linelength = l2->linelength;
@@ -384,7 +384,7 @@ Legend l1, l2;
   copy_label(l1->l, l2->l);
 }
 
-inherit_axes(g, lastg)
+void inherit_axes(g, lastg)
 Graph g;
 Graph lastg;
 {
@@ -401,7 +401,7 @@ Graph lastg;
   g->title->label = s;
 }
 
-getpattern(inp_str, key, p, a)
+void getpattern(inp_str, key, p, a)
 char *inp_str, *key, *p;
 float *a;
 {
@@ -430,7 +430,7 @@ float *a;
   return;
 }
 
-edit_curve(c, g)
+void edit_curve(c, g)
 Curve c;
 Graph g;
 {
@@ -725,7 +725,7 @@ Graph g;
   }
 }
 
-edit_hash_label(a)
+void edit_hash_label(a)
 Axis a;
 {
   float at, f;
@@ -776,7 +776,7 @@ Axis a;
   }
 }
 
-edit_axis(a)
+void edit_axis(a)
 Axis a;
 {
   char inp_str[256];
@@ -952,7 +952,7 @@ Axis a;
   }
 }
 
-edit_legend(l)
+void edit_legend(l)
 Legend l;
 {
   char inp_str[256];
@@ -1019,7 +1019,7 @@ Legend l;
   }
 }
 
-edit_graph(g, gs, all_gs)
+void edit_graph(g, gs, all_gs)
 Graph g;
 Graphs gs;
 Graphs all_gs;
@@ -1094,7 +1094,7 @@ Graphs all_gs;
   }
 }
 
-edit_graphs(gs)
+void edit_graphs(gs)
 Graphs gs;
 {
   Graphs the_g;

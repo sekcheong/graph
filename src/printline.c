@@ -68,7 +68,7 @@ static Fontlist Jgraph_fonts;
 static int Jgraph_gsave_level = -100;
 static int Jgraph_comment;
 
-gsave()
+void gsave()
 {
   if (Jgraph_gsave_level == -100) {
     Jgraph_gsave_level = 0;
@@ -78,7 +78,7 @@ gsave()
   printf(" gsave ");
 }
 
-grestore()
+void grestore()
 {
   Fontlist l;
 
@@ -93,7 +93,7 @@ grestore()
   printf(" grestore ");
 }
 
-setfont(f, s)
+void setfont(f, s)
 char *f;
 float s;
 {
@@ -120,7 +120,7 @@ float s;
   }
 }
   
-setfill( x, y, t, f, p, a)
+void setfill( x, y, t, f, p, a)
 char t, p ;
 float x, y;
 float f[], a ;
@@ -145,7 +145,7 @@ float f[], a ;
   printf(" grestore\n");
 }
 
-setgray( t, f)
+void setgray( t, f)
 char t ;
 float f[] ;
 {
@@ -156,7 +156,7 @@ float f[] ;
     }
 }
 
-printline(x1, y1,x2, y2, orientation)
+void printline(x1, y1,x2, y2, orientation)
 float x1, y1, x2, y2;
 char orientation;
 {
@@ -167,7 +167,7 @@ char orientation;
   fflush(stdout);
 } 
 
-print_ebar(x1, y1, x2, ms, orientation)
+void print_ebar(x1, y1, x2, ms, orientation)
 float x1, y1, x2, ms;
 char orientation;
 {
@@ -175,7 +175,7 @@ char orientation;
   printline(x2, y1-ms, x2, y1+ms, orientation);
 }
 
-start_line(x1, y1, c)
+void start_line(x1, y1, c)
 float x1, y1;
 Curve c;
 {
@@ -184,13 +184,13 @@ Curve c;
   printf("%f %f moveto ", x1, y1);
 }
 
-cont_line(x1, y1)
+void cont_line(x1, y1)
 float x1, y1;
 {
   printf("  %f %f lineto\n", x1, y1);
 }
 
-end_line()
+void end_line()
 {
   printf("stroke\n");
   setlinewidth(1.0);
@@ -199,32 +199,32 @@ end_line()
 
 }
 
-bezier_control(x1, y1)
+void bezier_control(x1, y1)
 float x1, y1;
 {
   printf("  %f %f ", x1, y1);
 }
 
-bezier_end(x1, y1)
+void bezier_end(x1, y1)
 float x1, y1;
 {
   printf("  %f %f curveto\n", x1, y1);
 }
 
 
-start_poly(x1, y1)
+void start_poly(x1, y1)
 float x1, y1;
 {
   printf(" newpath %f %f moveto", x1, y1);
 }
 
-cont_poly(x1, y1)
+void cont_poly(x1, y1)
 float x1, y1;
 {
   printf("  %f %f lineto\n", x1, y1);
 }
 
-end_poly(x, y, ftype, fill, pattern, parg)
+void end_poly(x, y, ftype, fill, pattern, parg)
 float x, y;
 char  ftype, pattern ;
 float fill[], parg;
@@ -237,7 +237,7 @@ float fill[], parg;
 
 /* Ellipse at 0, 0 -- assumes that you've already translated to x, y */
 
-printellipse(x, y, radius1, radius2, ftype, fill, pattern, parg)
+void printellipse(x, y, radius1, radius2, ftype, fill, pattern, parg)
 char ftype, pattern;
 float x, y, radius1, radius2, fill[], parg;
 {
@@ -247,19 +247,19 @@ float x, y, radius1, radius2, fill[], parg;
   fflush(stdout);
 }
 
-set_comment(c)
+void set_comment(c)
 int c;
 {
   Jgraph_comment = c;
 }
 
-comment(s)
+void comment(s)
 char *s;
 {
   if (Jgraph_comment) printf("%% %s\n", s);
 }
 
-printline_c(x1, y1, x2, y2, g)
+void printline_c(x1, y1, x2, y2, g)
 float x1, y1, x2, y2;
 Graph g;
 {
@@ -267,7 +267,7 @@ Graph g;
             ctop(x2, g->x_axis), ctop(y2, g->y_axis), 'x');
 }
 
-print_label(l)
+void print_label(l)
 Label l;
 {
   int f, i, nlines;
@@ -323,7 +323,7 @@ Label l;
     /* I would put string blanking in here if I had the time... */
  
     if (i != nlines) {
-      f = strlen(s);
+      f = (int) strlen(s);
       s[f] = '\n';
       s = &(s[f+1]);
       printf("show 0 %f translate\n", 
@@ -335,15 +335,12 @@ Label l;
   printf("grestore\n");
 }
 
-setlinewidth(size)
-float size;
+void setlinewidth(float size)
 {
   printf("%f setlinewidth ", size * LINEWIDTHFACTOR);
 }
 
-setlinestyle(style, glist)
-char style;
-Flist glist;
+void setlinestyle(char style, Flist glist)
 {
   Flist fl;
 

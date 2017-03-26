@@ -342,7 +342,7 @@ int num;
   return new_g;
 }
 
-new_graphs(gs)
+void new_graphs(gs)
 Graphs gs;
 {
   Graphs newg;
@@ -361,7 +361,7 @@ Graphs gs;
   insert((List) newg, (List) gs);
 }
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char **argv;
 {

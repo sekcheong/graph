@@ -62,7 +62,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 static double Pi;
 
-process_title(g)
+void process_label(Label l, Graph g, int adjust);
+void process_label_max_n_mins(Label l, float len, float height);
+void process_label_extrema(Label l, Graph g);
+
+void process_title(g)
 Graph g;
 {
 
@@ -87,7 +91,7 @@ Graph g;
   process_label(g->title, g, 0);
 }
 
-process_legend(g)
+void process_legend(g)
 Graph g;
 {
   Legend l;
@@ -359,7 +363,7 @@ Axis a;
   }
 }
 
-process_axis1(a, g)
+void process_axis1(a, g)
 Axis a;
 Graph g;
 {
@@ -429,7 +433,7 @@ Graph g;
   }
 }
 
-process_axis2(a, g)
+void process_axis2(a, g)
 Axis a;
 Graph g;
 {
@@ -619,10 +623,7 @@ Graph g;
   process_label (a->label, g, 0);
 }
 
-process_label(l, g, adjust)
-Label l;
-Graph g;
-int adjust;
+void process_label(Label l, Graph g, int adjust)
 {
   float len, height;
   int f, i;
@@ -661,10 +662,7 @@ int adjust;
   process_label_max_n_mins(l, len, height);
 }
    
-process_label_max_n_mins(l, len, height)
-Label l;
-float len;
-float height;
+void process_label_max_n_mins(Label l, float len, float height)
 {
   float xlen, ylen, xheight, yheight;
   float x, y;
@@ -710,7 +708,7 @@ float height;
 
 }
 
-process_strings(g)
+void process_strings(g)
 Graph g;
 {
   String s;
@@ -720,7 +718,7 @@ Graph g;
   }
 }
 
-process_curve(c, g)
+void process_curve(c, g)
 Curve c;
 Graph g;
 {
@@ -748,7 +746,7 @@ Graph g;
   if (c->pparg == FSIG) c->pparg = 0.0;
 }
 
-process_curves(g)
+void process_curves(g)
 Graph g;
 {
   Curve c;
@@ -757,7 +755,7 @@ Graph g;
   }
 }
  
-process_extrema(g)  /* This finds all the minval/maxvals for bbox calc */
+void process_extrema(g)  /* This finds all the minval/maxvals for bbox calc */
 Graph g;
 {
   Curve c;
@@ -807,9 +805,7 @@ Graph g;
   }
 }
 
-process_label_extrema(l, g)
-Label l;
-Graph g;
+void process_label_extrema(Label l, Graph g)
 {
   if (l->label == CNULL) return;
   g->yminval = MIN(g->yminval, l->ymin);
@@ -818,7 +814,7 @@ Graph g;
   g->xmaxval = MAX(g->xmaxval, l->xmax);
 }
 
-process_graph(g)
+void process_graph(g)
 Graph g;
 {
   g->x_translate = intop(g->x_translate);
@@ -834,7 +830,7 @@ Graph g;
   process_extrema(g);
 }
 
-process_graphs(gs)
+void process_graphs(gs)
 Graphs gs;
 {
   Graphs the_g;

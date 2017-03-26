@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <malloc.h>
+#include <malloc/malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,7 +32,6 @@ p------------>  |------------------------------------------------------------|
 	        | the second checksum                                        |
                 |------------------------------------------------------------|
 */
-
 
 typedef struct jmalloc {
   struct jmalloc *flink;
@@ -84,7 +83,7 @@ static int free_blocks = 0;
     init = 1;\
   }
 
-dump_core()
+void dump_core()
 {
   memlist->space[0] = 0;
 }
@@ -105,8 +104,7 @@ Jmalloc l;
   return jloc(l);
 }
 
-void *malloc(size)
-int size;
+void *malloc(int size)
 {
   int redo;
   int done;
@@ -244,7 +242,7 @@ jmalloc_print_mem()
   printf("Malloc called %d times\n", mc);
   printf("Free called %d times\n", fc);
   for (j = 0; j < i; j++) {
-    printf("Loc = 0x%x, size = %d, free = %d\n", bufs[j], 
+    printf("Loc = 0x%x, size = %d, free = %d\n", bufs[j],
            (sizes[j] > 0) ? sizes[j] : -sizes[j], (sizes[j] >= 0));
   }
 }
@@ -274,8 +272,7 @@ jmalloc_check_mem()
 }
 
   
-void free(loc)
-char *loc;
+void free(char *loc)
 {
   Jmalloc l;
   Jmalloc pl, nl;
@@ -349,10 +346,10 @@ int size;
   l = jmal(loc); 
 
   if (cksum(l) != l->cs) {
-    fprintf(stderr, "Error on realloc: memory chunk violated: 0x%x\n", loc);
+    fprintf(stderr, "Error on realloc: memory chunk violated: 0x%x\n", (unsigned int) loc);
     dump_core();
   } else if (cksum(l) != *(l->cs2)) {
-    fprintf(stderr, "Error on realloc: memory chunk violated: 0x%x\n", loc);
+    fprintf(stderr, "Error on realloc: memory chunk violated: 0x%x\n", (unsigned int) loc);
     dump_core();
   }
 
@@ -413,8 +410,7 @@ int size;
   }
 }
 
-char *calloc(nelem, elsize)
-int nelem, elsize;
+char *calloc(int nelem, int elsize)
 {
   int *iptr;
   char *ptr;

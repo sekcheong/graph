@@ -262,6 +262,16 @@ extern float ptodist();
 
 extern char *getlabel();
 extern char *getmultiline();
+extern void setlinewidth(float size);
+extern void setlinestyle(char style, Flist glist);
+
+extern void draw_label(Label l);
+extern void draw_curve(Curve c, Graph g);
+extern void draw_mark(float x, float y, Curve c,Graph g);
+extern void draw_arrow(float x1, float y1, float x2, float y2, Curve c);
+extern void draw_header(Graphs gs, int pp,int landscape);
+extern void draw_footer(Graphs gs, int pp);
+
 
 /* Stuff defined in jgraph.c */
 

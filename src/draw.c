@@ -92,7 +92,7 @@ float val;
 
 #define MAXIMUM(a,b) ((a > b) ? a : b)
 
-draw_axis(a, other)
+void draw_axis(a, other)
 Axis a, other;
 {
   char orientation;
@@ -158,15 +158,14 @@ Axis a, other;
 }
 
 
-draw_label(l)
-Label l;
+void draw_label(Label l)
 {
   if (l->label == CNULL) return;
   comment(l->label);
   print_label(l);
 }
 
-set_clip(g)
+void set_clip(g)
 Graph g;
 {
   comment("Setting Clip");
@@ -177,7 +176,7 @@ Graph g;
   printf("  closepath clip newpath\n");
 }
 
-draw_curves(g)
+void draw_curves(g)
 Graph g;
 {
   Curve c;
@@ -192,9 +191,7 @@ Graph g;
   printf("\n");
 }
 
-draw_curve(c, g)
-Curve c;
-Graph g;
+void draw_curve(Curve c, Graph g)
 {
   Point p, px, py;
   int i, j;
@@ -311,10 +308,7 @@ Graph g;
   printf("\n");
 }
 
-draw_mark(x, y, c, g)
-float x, y;
-Curve c;
-Graph g;
+void draw_mark(float x, float y, Curve c,Graph g)
 {
   Point p;
   float ms0, ms1, scx, scy, trx, try;
@@ -543,9 +537,7 @@ Graph g;
   grestore();
 }
 
-draw_arrow(x1, y1, x2, y2, c)
-float x1, y1, x2, y2;
-Curve c;
+void draw_arrow(float x1, float y1, float x2, float y2, Curve c)
 {
   float dx, dy;
   float ms0;
@@ -583,7 +575,7 @@ Curve c;
   printf("\n");
 }
 
-draw_legend(g)
+void draw_legend(g)
 Graph g;
 {
   Curve c;
@@ -647,7 +639,7 @@ Graph g;
   printf("\n");
 }
 
-draw_strings(g)
+void draw_strings(g)
 Graph g;
 {
   String s;
@@ -657,7 +649,7 @@ Graph g;
     draw_label(s->s);
 }
 
-draw_graph(g)
+void draw_graph(g)
 Graph g;
 {
   comment("Drawing New Graph");
@@ -678,7 +670,7 @@ Graph g;
 
 }
 
-draw_graphs(gs, pp, landscape)
+void draw_graphs(gs, pp, landscape)
 Graphs gs;
 int pp;
 int landscape;
@@ -695,10 +687,7 @@ int landscape;
   }
 }
 
-draw_header(gs, pp, landscape)
-Graphs gs;
-int pp;
-int landscape;
+void draw_header(Graphs gs, int pp,int landscape)
 {
   FILE *f;
   char c;
@@ -790,9 +779,7 @@ int landscape;
   }
 }
 
-draw_footer(gs, pp)
-Graphs gs;
-int pp;
+void draw_footer(Graphs gs, int pp)
 {
   FILE *f;
   char c;

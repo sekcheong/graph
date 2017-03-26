@@ -53,7 +53,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <math.h>
 #include "jgraph.h"
 
-static spaces(nsp)
+void static spaces(nsp)
 int nsp;
 {
   while(nsp-- > 0) putchar(' ');
@@ -87,7 +87,7 @@ Axis a;
   }
 }
 
-static show_mltiline(s)
+void static show_mltiline(s)
 char *s;
 {
   int i;
@@ -101,7 +101,7 @@ char *s;
   putchar('\n');
 }
 
-show_string(s)
+void show_string(s)
 char *s;
 {
   int i;
@@ -118,7 +118,7 @@ char *s;
 }
     
    
-show_label(l, nsp, g)
+void show_label(l, nsp, g)
 Label l;
 int nsp;
 Graph g;
@@ -142,7 +142,7 @@ Graph g;
   return;
 }
 
-show_lmark(l, nsp, g)
+void show_lmark(l, nsp, g)
 Label l;
 int nsp;
 Graph g;
@@ -157,7 +157,7 @@ Graph g;
   return;
 }
 
-show_curve(c, nsp, g)
+void show_curve(c, nsp, g)
 Curve c;
 int nsp;
 Graph g;
@@ -295,7 +295,7 @@ Graph g;
                           ptodist(c->asize[1], g->y_axis) * 2.0);
 }
 
-show_axis(a, nsp, g)
+void show_axis(a, nsp, g)
 Axis a;
 int nsp;
 Graph g;
@@ -386,7 +386,7 @@ Graph g;
   }
 }
 
-show_legend(l, nsp, g)
+void show_legend(l, nsp, g)
 Legend l;
 int nsp;
 Graph g;
@@ -406,7 +406,7 @@ Graph g;
   }
 }
 
-show_graph(g, nsp)
+void show_graph(g, nsp)
 Graph g;
 int nsp;
 {
@@ -438,7 +438,7 @@ int nsp;
   }
 }
 
-show_graphs(gs)
+void show_graphs(gs)
 Graphs gs;
 {
   Graphs the_g;

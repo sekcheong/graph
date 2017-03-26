@@ -70,7 +70,7 @@ typedef struct prio_list {
  * checks for inserting into the head or tail, and then proceeds sequentially.
  * Thus, it is worst case linear, but for most cases constant time (right). */
 
-prio_insert(node, list, desc)
+void prio_insert(node, list, desc)
 Prio_list node;
 Prio_list list;
 Boolean desc;

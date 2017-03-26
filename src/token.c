@@ -75,7 +75,7 @@ typedef struct iostack {
 static char INPUT[1000];
 static int getnew = 1;
 static char oldchar = '\0';
-static oldcharvalid = 0;
+static int oldcharvalid = 0;
 static char pipe = 0;
 static int eof = 0;
 static int init = 0;
@@ -100,7 +100,7 @@ FILE *stream;
 }
 #endif /*VMS*/
 
-set_input_file(char *s)
+void set_input_file(char *s)
 {
   FILE *f;
   Iostack n;
@@ -132,7 +132,7 @@ set_input_file(char *s)
   }
 }
 
-error_header()
+void error_header()
 {
   fprintf(stderr, "%s,%d: ", FILENAME, line);
 }
@@ -145,7 +145,7 @@ int gettokenchar()
   return oldchar;
 }
 
-ungettokenchar()
+void ungettokenchar()
 {
   oldcharvalid = 1;
   if (oldchar == '\n') line--;
@@ -170,7 +170,7 @@ char *s;
   return i;
 }
 
-get_comment()
+void get_comment()
 {
   if (eof) return;
   while (1) {
@@ -187,7 +187,7 @@ static int iostackempty()
   return (first(stack) == nil(stack));
 }
 
-static push_iostack(p)
+void static push_iostack(p)
 int p;
 {
   Iostack n;
@@ -216,7 +216,7 @@ int p;
   strcpy(FILENAME, INPUT);
 }
 
-static pop_iostack()
+void static pop_iostack()
 {
   Iostack n;
 
@@ -249,7 +249,7 @@ static pop_iostack()
   free_node((List) n, (List) stack);
 }
 
-static nexttoken()
+void static nexttoken()
 {
   if (eof) return;
   if (getnew) {
@@ -454,7 +454,7 @@ int getsystemstring()
   return 1;
 }
 
-rejecttoken()
+void rejecttoken()
 {
   getnew = 0;
 }
